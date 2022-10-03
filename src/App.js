@@ -1,4 +1,6 @@
-import "./categories.styles.scss";
+// import "./categories.styles.scss";
+import CategoryItem from "./components/category-item/category-item.component";
+import Directory from "./components/directory/directory.component";
 
 const App = () => {
   const categories = [
@@ -29,64 +31,7 @@ const App = () => {
     },
   ];
 
-  return (
-    <div className="categories-container">
-      {categories.map((category) => {
-        return (
-          <div className="category-container" key={category.id}>
-            <div
-              className="background-image"
-              style={{
-                backgroundImage: `url(${category.imageUrl})`,
-              }}
-            />
-            <div className="category-body-container">
-              <h2>{category.title}</h2>
-              <p>Shop Now</p>
-            </div>
-          </div>
-        );
-      })}
-
-      {/*  Optimization - remove hard-coding
-
-      <div className="category-container">
-        <img />
-        <div className="category-body-container">
-          <h2>HATS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>JACKETS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>SNEAKERS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>WOMENS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>MENS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div> */}
-    </div>
-  );
+  return <Directory categories={categories} />;
 };
 
 export default App;
