@@ -1,37 +1,24 @@
-// import "./categories.styles.scss";
-import CategoryItem from "./components/category-item/category-item.component";
-import Directory from "./components/directory/directory.component";
+// import Directory from "./components/directory/directory.component";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Home from "./components/routes/home/home.component";
+import Navigation from "./components/routes/navigation/navigation.component";
+
+const ShopTest = () => {
+  return <h1>This is the ShopTest Page</h1>;
+};
 
 const App = () => {
-  const categories = [
-    {
-      id: 1,
-      title: "hats",
-      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-    },
-    {
-      id: 2,
-      title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-    },
-    {
-      id: 3,
-      title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-    },
-    {
-      id: 4,
-      title: "womens",
-      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-    },
-    {
-      id: 5,
-      title: "mens",
-      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-    },
-  ];
+  return (
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        {/* instead of path, use index--> as long as parent's / match, it will be rendered in the outlet position */}
 
-  return <Directory categories={categories} />;
+        {/* <Route path="home" element={<Home />} /> */}
+        <Route path="shop" element={<ShopTest />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
