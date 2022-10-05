@@ -4,6 +4,7 @@ import {
   signInWithRedirect, // siginig with redirected page
   signInWithPopup, // signing with pop-up
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import {
   getFirestore, // instantiate firestore instance
@@ -38,14 +39,21 @@ provider.setCustomParameters({
 export const auth = getAuth();
 // Anonymous function return signInWithPopup passing (auth , provider)
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
+// Anonymous function return signInWithRedirect passing (auth , provider)
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 // ----------------------------------------------------------------------------
 
 // database
 export const db = getFirestore();
 
 // function that will take that data we're getting from the authentication service, and then we're going to store that inside of fire store.
-export const createUserDocumentFromAuth = async (userAuth) => {
+// export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {} // empty object by default
+) => {
+  if (!userAuth) return; // If we don't receive userAuth info, exits.
   const userDocRef = doc(db, "users", userAuth.uid);
   // Arguments (database, user collection, ID)
   // Notice that this is reference pointing to the unique id of the data in order to set the data from there.
@@ -67,11 +75,21 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot Create User/ Email is already in use");
+      }
       console.log("error created", error.message);
     }
   }
 
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return; // if i don't either receive email or password, exit
+
+  return await createUserWithEmailAndPassword(auth, email, password); // will return auth object
 };
