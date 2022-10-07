@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore, // instantiate firestore instance
@@ -89,6 +91,8 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+// the below is called 'Helper function'
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return; // if i don't either receive email or password, exit
 
@@ -99,4 +103,13 @@ export const signAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return; // if i don't either receive email or password, exit
 
   return await signInWithEmailAndPassword(auth, email, password); // will return auth object
+};
+
+export const SignoutUser = async () => await signOut(auth);
+
+//onAuthStateChanged you need to give callback function for this.
+// it will call this callback whenever the authentication state of our auth changes.
+export const onAuthStateChangedListner = (callback) => {
+  if (!callback) return;
+  onAuthStateChanged(auth, callback);
 };

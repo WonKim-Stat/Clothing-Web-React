@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import {
@@ -25,15 +26,18 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup(); // destructuring to get only user in the response
-    await createUserDocumentFromAuth(user); // need to use await because the method is asyncronious
+    await signInWithGooglePopup();
+    // const { user } = await signInWithGooglePopup(); // destructuring to get only user in the response
+    // await createUserDocumentFromAuth(user); // need to use await because the method is asyncronious
+    // |=> move into onAuthStateChangedListner
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await signAuthUserWithEmailAndPassword(email, password);
-      console.log(response);
+      const { user } = await signAuthUserWithEmailAndPassword(email, password);
+
+      //   setCurrentUser(user);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
