@@ -107,8 +107,9 @@ export const signAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const SignoutUser = async () => await signOut(auth);
 
+// We will use this to centralize the user in/out.
 //onAuthStateChanged you need to give callback function for this.
-// it will call this callback whenever the authentication state of our auth changes.
+// it will call this callback whenever the auth changes. (sign-in or sign-out)
 export const onAuthStateChangedListner = (callback) => {
   if (!callback) return;
   onAuthStateChanged(auth, callback);

@@ -13,8 +13,14 @@ import "./navigation.styles.scss";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/user.context";
 
+import { CartContext } from "../../../contexts/cart.context";
+import CartIcon from "../../cart-icon/cart-icon.component";
+
+import CartDropdown from "../../cart-dropdown/cart-dropdown.component";
+
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext); //  conditionally render the CART dropdown based on the truthiness
 
   return (
     <Fragment>
@@ -22,6 +28,7 @@ const Navigation = () => {
         <Link className="logo-container" to="/">
           <CrwnLogo className="logo" />
         </Link>
+
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
             SHOP
@@ -33,7 +40,10 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          {<CartIcon />}
         </div>
+        {/* Using shortcircuit operator */}
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
