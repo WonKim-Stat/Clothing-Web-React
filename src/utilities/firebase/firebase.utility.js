@@ -5,6 +5,9 @@ import {
   signInWithPopup, // signing with pop-up
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore, // instantiate firestore instance
@@ -88,8 +91,26 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+// the below is called 'Helper function'
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return; // if i don't either receive email or password, exit
 
   return await createUserWithEmailAndPassword(auth, email, password); // will return auth object
+};
+
+export const signAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return; // if i don't either receive email or password, exit
+
+  return await signInWithEmailAndPassword(auth, email, password); // will return auth object
+};
+
+export const SignoutUser = async () => await signOut(auth);
+
+// We will use this to centralize the user in/out.
+//onAuthStateChanged you need to give callback function for this.
+// it will call this callback whenever the auth changes. (sign-in or sign-out)
+export const onAuthStateChangedListner = (callback) => {
+  if (!callback) return;
+  onAuthStateChanged(auth, callback);
 };

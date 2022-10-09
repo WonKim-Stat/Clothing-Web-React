@@ -4,9 +4,9 @@ import Home from "./components/routes/home/home.component";
 import Navigation from "./components/routes/navigation/navigation.component";
 import SignIn from "./components/routes/sign-in/sign-in.component";
 
-const ShopTest = () => {
-  return <h1>This is the ShopTest Page</h1>;
-};
+import Shop from "./components/routes/shop/shop.component";
+
+import CartIcon from "/Users/wonseokkim/complete-react/clothing-shop/src/components/cart-icon/cart-icon.component.jsx";
 
 const App = () => {
   return (
@@ -16,11 +16,14 @@ const App = () => {
         {/* instead of path, use index--> as long as parent's / match, it will be rendered in the outlet position */}
 
         {/* <Route path="home" element={<Home />} /> */}
-        <Route path="shop" element={<ShopTest />} />
-        <Route path="sign-in" element={<SignIn />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="auth" element={<SignIn />} />
+        {/* <Route path="cart" element={<CartIcon />} /> */}
       </Route>
     </Routes>
   );
 };
 
 export default App;
+
+// THis is a test for branch
