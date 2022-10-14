@@ -1,26 +1,20 @@
 import "./category-item.styles.scss";
 
-const categoryItem = (category) => {
+const CategoryItem = ({ category }) => {
+  const { imageUrl, title } = category;
   return (
-    <div className="categories-container">
-      {categories.map((category) => {
-        return (
-          <div className="category-container" key={category.id}>
-            <div
-              className="background-image"
-              style={{
-                backgroundImage: `url(${category.imageUrl})`,
-              }}
-            />
-            <div className="category-body-container">
-              <h2>{category.title}</h2>
-              <p>Shop Now</p>
-            </div>
-          </div>
-        );
-      })}
+    // <div className="category-container" key={id}> move key into part calling map function
+    <div className="category-container">
+      <div
+        className="background-image"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
+      <div className="category-body-container">
+        <h2>{title}</h2>
+        <p>Shop Now</p>
+      </div>
     </div>
   );
 };
 
-export default categoryItem;
+export default CategoryItem;

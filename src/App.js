@@ -1,91 +1,19 @@
-import "./categories.styles.scss";
+import Navigation from "./components/routes/navigation/navigation.component";
+import Shop from "./components/routes/shop/shop.component";
+import Home from "./components/routes/home/home.component";
+
+import { Routes, Route } from "react-router-dom";
+import Authentication from "./components/routes/authentication/authentication.component";
 
 const App = () => {
-  const categories = [
-    {
-      id: 1,
-      title: "hats",
-      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-    },
-    {
-      id: 2,
-      title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-    },
-    {
-      id: 3,
-      title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-    },
-    {
-      id: 4,
-      title: "womens",
-      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-    },
-    {
-      id: 5,
-      title: "mens",
-      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-    },
-  ];
-
   return (
-    <div className="categories-container">
-      {categories.map((category) => {
-        return (
-          <div className="category-container" key={category.id}>
-            <div
-              className="background-image"
-              style={{
-                backgroundImage: `url(${category.imageUrl})`,
-              }}
-            />
-            <div className="category-body-container">
-              <h2>{category.title}</h2>
-              <p>Shop Now</p>
-            </div>
-          </div>
-        );
-      })}
-
-      {/*  Optimization - remove hard-coding
-
-      <div className="category-container">
-        <img />
-        <div className="category-body-container">
-          <h2>HATS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>JACKETS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>SNEAKERS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>WOMENS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        
-        <div className="category-body-container">
-          <h2>MENS</h2>
-          <p>Shop Now</p>
-        </div>
-      </div> */}
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="auth" element={<Authentication />} />
+      </Route>
+    </Routes>
   );
 };
 
