@@ -1,11 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-
-import { UserContext } from "../../contexts/user.context";
 
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "/Users/wonseokkim/complete-react/clothing-shop/src/utils/firebase/firebase.utils.js";
 
@@ -22,12 +19,12 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
+    // console.log(formFields);
   };
 
   const reset = () => {
@@ -36,9 +33,10 @@ const SignInForm = () => {
 
   // sign in with google pop-up
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = createUserDocumentFromAuth(user);
-    setCurrentUser(user);
+    await signInWithGooglePopup();
+    // const { user } = await signInWithGooglePopup();
+    // const userDocRef = createUserDocumentFromAuth(user);
+    // setCurrentUser(user);
   };
 
   const handleSubmit = async (event) => {
@@ -49,7 +47,7 @@ const SignInForm = () => {
         password
       );
 
-      setCurrentUser(user);
+      // setCurrentUser(user);
       reset();
     } catch (error) {
       switch (error.code) {
