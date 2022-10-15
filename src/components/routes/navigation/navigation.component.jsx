@@ -5,14 +5,19 @@ import { Fragment } from "react";
 
 import { UserContext } from "../../../contexts/user.context";
 
+import { CartContext } from "../../../contexts/cart.context";
+
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
 import { ReactComponent as CrwnLogo } from "/Users/wonseokkim/complete-react/clothing-shop/src/assets/crown.svg";
 
 import "./navigation.styles.scss";
+import CartIcon from "../../cart-icon/cart-icon.component";
+import CartDropdown from "../../cart-dropdown/cart-dropdown.component";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   // const signOutHandler = async () => {
   //   await signOutUser();
@@ -23,9 +28,7 @@ const Navigation = () => {
     <Fragment>
       <div className="navigation">
         <Link className="logo-container" to="/">
-          <div>
-            <CrwnLogo className="logo" />
-          </div>
+          <CrwnLogo className="logo" />
         </Link>
 
         <div className="nav-links-container">
@@ -42,7 +45,9 @@ const Navigation = () => {
               SIGN-IN
             </Link>
           )}
+          <CartIcon />
         </div>
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
