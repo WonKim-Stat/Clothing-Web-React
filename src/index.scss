@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  padding: 20px 40px; //20px top and bottom, 40px left and right
-  font-family: sans-serif;
+  padding: 20px 40px;
+  font-family: "Open Sans Condense" sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,8 +10,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-//  set anchor tag for link not to have underline
+
 a {
   text-decoration: none;
   color: black;
+}
+
+* {
+  box-sizing: border-box;
 }

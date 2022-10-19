@@ -3,9 +3,10 @@ import "./directory.styles.scss";
 
 const Directory = ({ categories }) => {
   return (
-    <div className="directory-container">
+    <div className="directories-container">
       {categories.map((category) => {
-        return <CategoryItem category={category} key={category.id} />;
+        //* key not in the components actually call the map! here
+        return <CategoryItem key={category.id} category={category} />;
       })}
     </div>
   );

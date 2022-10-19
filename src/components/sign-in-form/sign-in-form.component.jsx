@@ -1,14 +1,14 @@
 import { useState } from "react";
-
-import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+
 import {
-  signAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
-} from "../../utilities/firebase/firebase.utility";
-import { createUserDocumentFromAuth } from "../../utilities/firebase/firebase.utility";
+  signInAuthUserWithEmailAndPassword,
+} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
 
 import "./sign-in-form.styles.scss";
+
+import Button from "../button/button.component";
 
 const defaultFormFields = {
   email: "",
@@ -17,71 +17,76 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields; // desctructuring
+  const { email, password } = formFields;
+
+  // const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
+    // console.log(formFields);
   };
 
-  const signInWithGoogle = async () => {
+  const reset = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  // sign in with google pop-up
+  const logGoogleUser = async () => {
     await signInWithGooglePopup();
-    // const { user } = await signInWithGooglePopup(); // destructuring to get only user in the response
-    // await createUserDocumentFromAuth(user); // need to use await because the method is asyncronious
-    // |=> move into onAuthStateChangedListner
+    // const { user } = await signInWithGooglePopup();
+    // const userDocRef = createUserDocumentFromAuth(user);
+    // setCurrentUser(user);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { user } = await signAuthUserWithEmailAndPassword(email, password);
+      const { user } = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
 
-      //   setCurrentUser(user);
+      // setCurrentUser(user);
+      reset();
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
-          alert("incorrect password for email");
+          alert("wrong-password");
           break;
         case "auth/user-not-found":
-          alert("user-not-found");
+          alert("auth/user-not-found");
           break;
-        default:
-          console.log(error);
       }
-      //     if (error.code === "auth/wrong-password") {
-      //         alert('incorrect password for email')
-      //     } else if ///
-      //   console.log("Authentication error occurred", error);
     }
   };
 
   return (
-    <div className="sign-up-container">
-      <h2>Don't have an account?</h2>
-      <span>Sign up with your email and password</span>
-      {/* <form onSubmit={handleSubmit}> */}
-      <form onSubmit={() => {}}>
+    <div className="sign-in-container">
+      <h2>I already have an account</h2>
+      <span>Sign in wiht your email and password</span>
+      <form onSubmit={handleSubmit}>
         <FormInput
-          label="Email"
-          type="email"
+          label="email"
           required
-          onChange={handleChange}
+          type="email"
           name="email"
           value={email}
+          onChange={handleChange}
         />
+
         <FormInput
           label="Password"
-          type="passwordemail"
           required
-          onChange={handleChange}
+          type="password"
           name="password"
           value={password}
+          onChange={handleChange}
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
-            SIGN IN WITH GOOGLE
+          <Button onClick={logGoogleUser} buttonType="google">
+            Sign In with Google
           </Button>
         </div>
       </form>

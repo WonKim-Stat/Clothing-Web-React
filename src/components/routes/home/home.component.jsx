@@ -1,6 +1,4 @@
-import { Outlet } from "react-router-dom";
-
-import Directory from "/Users/wonseokkim/complete-react/clothing-shop/src/components/directory/directory.component.jsx";
+import Directory from "../../directory/directory.component";
 
 const Home = () => {
   const categories = [
@@ -31,12 +29,7 @@ const Home = () => {
     },
   ];
 
-  return (
-    <div>
-      <Outlet />
-      <Directory categories={categories} />
-    </div>
-  );
+  return <Directory categories={categories} />;
 };
 
 export default Home;

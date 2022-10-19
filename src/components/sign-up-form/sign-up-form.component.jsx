@@ -1,13 +1,15 @@
 import { useState } from "react";
-
-import "./sign-up-form.sityles.scss";
-import Button from "../button/button.component";
-// import { FormInput } from "/Users/wonseokkim/complete-react/clothing-shop/src/components/form-input/form-input.component.jsx";
+import FormInput from "../form-input/form-input.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "../../utilities/firebase/firebase.utility";
-import FormInput from "../form-input/form-input.component";
+} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
+
+// import { UserContext } from "../../contexts/user.context";
+
+import "./sign-up-form.styles.scss";
+
+import Button from "../button/button.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -17,91 +19,83 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
-  // const [name,setName] = useState("")
-  // const [email,setemail] = useState("")
-  // const [password1,setPassword1] = useState("")
-  // const [password2,setPassword2] = useState("")
-
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields; // desctructuring
+  const { displayName, email, password, confirmPassword } = formFields;
 
-  const resetFormFields = () => {
+  // const { setCurrentUser } = useContext(UserContext);
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+    setFormFields({ ...formFields, [name]: value });
+    console.log(formFields);
+  };
+
+  const reset = () => {
     setFormFields(defaultFormFields);
   };
 
-  //it is an async method because we're generating a user document inside of an external service
   const handleSubmit = async (event) => {
-    event.preventDefault(); // to prevent the page from refreshing when the form is submitted.
-
-    //  To get the input values on form submit, we simply access the state variables.
-    if (password != confirmPassword) {
-      alert("password is not matching");
-      return;
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      alert("the password is not matched, please try again");
+      return; // exit
     }
-
     try {
-      //   const response = await createAuthUserWithEmailAndPassword(
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
 
+      // setCurrentUser(user);
+
       await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
+      reset();
     } catch (error) {
-      console.log("Authentication error occurred", error);
+      console.log(error.message);
     }
-
-    // 1. password matches
-    // 2. authenticate email with password
-    // 3. using createAuthUserWithEmailAndPassword to store data
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target; // desctructruing to identify where is the change coming from
-    setFormFields({ ...formFields, [name]: value }); //spread object to keep the rest of the keys with info and then modify one value on this object.
   };
 
   return (
     <div className="sign-up-container">
-      <h2>Don't have an account?</h2>
+      <h2>I do not have an account</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
-          type="text"
           required
-          onChange={handleChange}
+          type="text"
           name="displayName"
           value={displayName}
+          onChange={handleChange}
         />
+
         <FormInput
           label="Email"
-          type="email"
           required
-          onChange={handleChange}
+          type="email"
           name="email"
           value={email}
+          onChange={handleChange}
         />
+
         <FormInput
           label="Password"
-          type="password"
           required
-          onChange={handleChange}
+          type="password"
           name="password"
           value={password}
+          onChange={handleChange}
         />
+
         <FormInput
           label="Confirm Password"
-          type="password"
           required
-          onChange={handleChange}
+          type="password"
           name="confirmPassword"
           value={confirmPassword}
+          onChange={handleChange}
         />
-        <Button buttonType="google" type="submit">
-          Sign Up
-        </Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
