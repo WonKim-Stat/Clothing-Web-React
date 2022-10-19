@@ -3,7 +3,7 @@ import FormInput from "../form-input/form-input.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "/Users/wonseokkim/complete-react/clothing-shop/src/utils/firebase/firebase.utils.js";
+} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
 
 // import { UserContext } from "../../contexts/user.context";
 
