@@ -14,6 +14,10 @@ import {
   doc, // the method allows us to retrieve document instance.
   getDoc, // access doc
   setDoc, // set doc
+  collection, // collection to get referece of collection
+  writeBatch,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -113,4 +117,35 @@ export const SignoutUser = async () => await signOut(auth);
 export const onAuthStateChangedListner = (callback) => {
   if (!callback) return;
   onAuthStateChanged(auth, callback);
+};
+
+// creating a method that allows us to upload these categories from that shop data
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = collection(db, collectionKey);
+  // want to add objectsToAdd into reference
+  const batch = writeBatch(db);
+  // create set events
+  objectsToAdd.forEach((object) => {
+    // get doc reference
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+  return categoryMap;
 };
