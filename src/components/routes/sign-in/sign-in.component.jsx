@@ -9,9 +9,10 @@ import SignInForm from "../../sign-in-form/sign-in-form.component";
 
 import SignUpForm from "../../sign-up-form/sign-up-form.component";
 
-import Button from "../../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../../button/button.component";
 
-import "./sign-in.styles.scss";
+// import "./sign-in.styles.jsx";
+import { AuthContainer } from "./sign-in.styles";
 
 const SignIn = () => {
   // when the function mount for the first time
@@ -26,13 +27,13 @@ const SignIn = () => {
   // };
 
   return (
-    <div className="authentication-container">
+    <AuthContainer>
       <SignInForm />
       {/* <Button buttonType="google" onClick={logGoogleUser}>
         Sign in with Google
       </Button> */}
       <SignUpForm />
-    </div>
+    </AuthContainer>
   );
 };
 

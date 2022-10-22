@@ -5,7 +5,8 @@ import ProductCard from "/Users/wonseokkim/complete-react/startover1/Clothing-We
 
 import { CategoriesContext } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/contexts/categories.context.jsx";
 
-import "./cagetory.styles.scss";
+// import "./cagetory.styles.jsx";
+import { CategoryContainer, CategoryTitle } from "./cagetory.styles";
 
 const Category = () => {
   const { category } = useParams();
@@ -18,13 +19,13 @@ const Category = () => {
 
   return (
     <Fragment>
-      <h2 className="category-title">{category.toUpperCase()}</h2>
-      <div className="category-container">
+      <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+      <CategoriesContext>
         {products &&
           products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </CategoriesContext>
     </Fragment>
   );
 };

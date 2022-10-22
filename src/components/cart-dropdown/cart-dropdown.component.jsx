@@ -7,7 +7,13 @@ import { useNavigate, useNaviggate } from "react-router-dom";
 
 import Button from "../button/button.component";
 import CartItem from "../cart-item/cart-item.components";
-import "./cart-dropdown.styles.scss";
+
+// import "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/components/cart-dropdown/cart-dropdown.style.scss";
+import {
+  CartDropdownContainer,
+  EmptyMessage,
+  CartItems,
+} from "./cart-dropdown.style";
 
 const CartDropdown = () => {
   const { cartItems, isCartOpen, setIsCartOpen } = useContext(CartContext);
@@ -19,16 +25,18 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className="cart-dropdown-container">
-      <div className="cart-items">
-        {cartItems.map((item) => (
-          <CartItem key={item.id} cartItem={item} />
-        ))}
-      </div>
+    <CartDropdownContainer>
+      <CartItems>
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
+        ) : (
+          <EmptyMessage>This is empty</EmptyMessage>
+        )}
+      </CartItems>
       {/* <Link to="/checkout"> */}
       <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
       {/* </Link> */}
-    </div>
+    </CartDropdownContainer>
   );
 };
 

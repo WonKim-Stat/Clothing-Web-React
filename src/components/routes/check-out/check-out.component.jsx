@@ -1,31 +1,38 @@
-import "./check-out.styles.scss";
+// import "./check-out.styles.jsx";
 
 import { useContext } from "react";
 import { CartContext } from "../../../contexts/cart.context";
 
 import CheckoutItem from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/components/checkout-item/checkout-item.component.jsx";
 
+import {
+  Total,
+  HeaderBlock,
+  CheckoutHeader,
+  CheckoutContainer,
+} from "./check-out.styles";
+
 const CheckOut = () => {
   const { cartItems, cartTotal } = useContext(CartContext);
   return (
-    <div className="checkout-container">
-      <div className="checkout-header">
-        <div className="header-block">
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
+        </HeaderBlock>
+      </CheckoutHeader>
       {cartItems.map(
         (cartItem) => (
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
@@ -39,8 +46,8 @@ const CheckOut = () => {
         //   <span onClick={() => removeItem(cartItem)}>Remove</span>
         // </div>
       )}
-      <span className="total">Total: ${cartTotal} </span>
-    </div>
+      <Total>Total: ${cartTotal} </Total>
+    </CheckoutContainer>
   );
 };
 

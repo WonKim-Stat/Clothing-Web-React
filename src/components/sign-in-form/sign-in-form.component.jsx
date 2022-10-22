@@ -6,9 +6,11 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
 
-import "./sign-in-form.styles.scss";
+// import "./sign-in-form.styles.jsx";
 
-import Button from "../button/button.component";
+import { SignInContainer, ButtonContainer } from "./sign-in-form.styles";
+
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 const defaultFormFields = {
   email: "",
@@ -62,7 +64,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer>
       <h2>I already have an account</h2>
       <span>Sign in wiht your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -83,14 +85,17 @@ const SignInForm = () => {
           value={password}
           onChange={handleChange}
         />
-        <div className="buttons-container">
+        <ButtonContainer>
           <Button type="submit">Sign In</Button>
-          <Button onClick={logGoogleUser} buttonType="google">
+          <Button
+            onClick={logGoogleUser}
+            buttonType={BUTTON_TYPE_CLASSES.google}
+          >
             Sign In with Google
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

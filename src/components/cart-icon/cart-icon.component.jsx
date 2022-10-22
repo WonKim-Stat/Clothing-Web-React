@@ -1,9 +1,13 @@
-import "./cart-icon.styles.scss";
-
-import { ReactComponent as ShoppingIcon } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/assets/shopping-bag.svg";
+// import { ReactComponent as ShoppingIcon } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/assets/shopping-bag.svg";
 
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
+
+import {
+  CartIconContainer,
+  ShoppingIconImage,
+  ItemCount,
+} from "./cart-icon.styles";
 
 const CartIcon = () => {
   const { isCartOpen, setIsCartOpen } = useContext(CartContext);
@@ -14,11 +18,11 @@ const CartIcon = () => {
   };
 
   return (
-    <div className="cart-icon-container">
-      <ShoppingIcon className="shopping-icon" onClick={cartOpenHandler} />
+    <CartIconContainer>
+      <ShoppingIconImage onClick={cartOpenHandler} />
 
-      <span className="item-count">{cartQuantity}</span>
-    </div>
+      <ItemCount>{cartQuantity}</ItemCount>
+    </CartIconContainer>
   );
 };
 
