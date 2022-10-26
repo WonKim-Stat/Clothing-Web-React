@@ -8,9 +8,14 @@ import { CategoriesContext } from "/Users/wonseokkim/complete-react/startover1/C
 // import "./cagetory.styles.jsx";
 import { CategoryContainer, CategoryTitle } from "./cagetory.styles";
 
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../../store/categories/category.selector";
+
 const Category = () => {
   const { category } = useParams();
-  const { categoriesMap } = useContext(CategoriesContext);
+  // const { categoriesMap } = useContext(CategoriesContext);
+  // const categoriesMap = useSelector((state) => state.categories.categoriesMap);
+  const categoriesMap = useSelector(selectCategoriesMap);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
