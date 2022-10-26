@@ -1,7 +1,13 @@
-// import "./check-out.styles.jsx";
+// // import "./check-out.styles.jsx";
 
-import { useContext } from "react";
-import { CartContext } from "../../../contexts/cart.context";
+// import { useContext } from "react";
+// import { CartContext } from "../../../contexts/cart.context";
+
+import { useSelector } from "react-redux";
+import {
+  selectCartItems,
+  selectCartTotal,
+} from "../../../store/cart/cart.selector";
 
 import CheckoutItem from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/components/checkout-item/checkout-item.component.jsx";
 
@@ -13,7 +19,10 @@ import {
 } from "./check-out.styles";
 
 const CheckOut = () => {
-  const { cartItems, cartTotal } = useContext(CartContext);
+  // const { cartItems, cartTotal } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+
   return (
     <CheckoutContainer>
       <CheckoutHeader>
