@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import { CATEGORY_ACTION_TYPES } from "./category.types";
-import { getCategoriesAndDocuments } from "../../utilities/firebase/firebase.utility";
+// import { getCategoriesAndDocuments } from "../../utilities/firebase/firebase.utility";
 
 // export const setCategories = (categoriesArray) => ({
 //   type: CATEGORY_ACTION_TYPES.SET_CATEGORIES,
@@ -22,16 +22,16 @@ export const fetchCategoriesFailed = (error) => ({
 });
 
 // thunk action
-export const fetchCategoriesAsync = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart());
+// export const fetchCategoriesAsync = () => async (dispatch) => {
+//   dispatch(fetchCategoriesStart());
 
-  try {
-    const categoriesArray = await getCategoriesAndDocuments("categories");
-    dispatch(fetchCategoriesSuccess(categoriesArray));
-  } catch (error) {
-    dispatch(fetchCategoriesFailed(error));
-  }
-};
+//   try {
+//     const categoriesArray = await getCategoriesAndDocuments("categories");
+//     dispatch(fetchCategoriesSuccess(categoriesArray));
+//   } catch (error) {
+//     dispatch(fetchCategoriesFailed(error));
+//   }
+// };
 
 // export const fetchCategoriesStartAsync = () => {
 //   return async (dispatch) => {
