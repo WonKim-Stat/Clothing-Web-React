@@ -8,10 +8,11 @@ import Authentication from "./components/routes/authentication/authentication.co
 
 import { useEffect } from "react";
 
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession, setCurrentUser } from "./store/user/user.action";
 
 import {
   createUserDocumentFromAuth,
+  getCurrentUser,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase.utils";
 
@@ -20,15 +21,19 @@ import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChangedListener((user) => {
+  //     // console.log(user);
+  //     dispatch(setCurrentUser(user));
+  //     if (user) {
+  //       createUserDocumentFromAuth(user);
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      // console.log(user);
-      dispatch(setCurrentUser(user));
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-    });
-    return unsubscribe;
+    // getCurrentUser().then((user) => console.log(user));
+    dispatch(checkUserSession());
   }, []);
 
   return (
