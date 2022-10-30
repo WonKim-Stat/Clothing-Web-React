@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import FormInput from "../form-input/form-input.component";
 
 import {
@@ -22,9 +21,9 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const dispatch = useDispatch();
 
   // const { setCurrentUser } = useContext(UserContext);
 

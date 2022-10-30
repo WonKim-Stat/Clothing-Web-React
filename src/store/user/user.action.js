@@ -8,6 +8,7 @@ export const setCurrentUser = (user) => ({
 export const checkUserSession = () => ({
   type: USER_ACTION_TYPES.CHECK_USER_SESSION,
 });
+
 export const googleSignInStart = () => ({
   type: USER_ACTION_TYPES.GOOGLE_SIGN_IN_START,
 });

@@ -8,8 +8,6 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
 import reportWebVitals from "./reportWebVitals";
-// import { CategoriesProvider } from "./contexts/categories.context";
-import { CartProvider } from "./contexts/cart.context";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 
@@ -21,13 +19,7 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          {/* <UserProvider> */}
-          {/* <CategoriesProvider> */}
-          {/* <CartProvider> */}
           <App />
-          {/* </CartProvider> */}
-          {/* </CategoriesProvider> */}
-          {/* </UserProvider> */}
         </BrowserRouter>
       </PersistGate>
     </Provider>

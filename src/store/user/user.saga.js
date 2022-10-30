@@ -6,28 +6,16 @@ import {
   getCurrentUser,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-} from "../../utils/firebase/firebase.utils";
+} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utilities/firebase/firebase.utility.js";
 
-// once we have userAuth object
-export function* getSnapshotFromUserAuth(userAuth, additionalInfo) {
+export function* getSnapshotFromUserAuth(userAuth, additionalInformation) {
   try {
     const userSnapshot = yield call(
       createUserDocumentFromAuth,
       userAuth,
-      additionalInfo
+      additionalInformation
     );
-    console.log(userSnapshot);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
-  } catch (error) {
-    yield put(signInFailed(error));
-  }
-}
-
-export function* inUserAuthenticated() {
-  try {
-    const userAuth = yield call(getCurrentUser);
-    if (!userAuth) return;
-    yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
     yield put(signInFailed(error));
   }
@@ -42,12 +30,22 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* onCheckUserSession() {
-  yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, inUserAuthenticated);
+export function* isUserAuthenticated() {
+  try {
+    const userAuth = yield call(getCurrentUser);
+    if (!userAuth) return;
+    yield call(getSnapshotFromUserAuth, userAuth);
+  } catch (error) {
+    yield put(signInFailed(error));
+  }
 }
 
 export function* onGoogleSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
+}
+
+export function* onCheckUserSession() {
+  yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
 export function* userSagas() {
