@@ -22,12 +22,19 @@ const middleWares = [
   sagaMiddleware,
   // thunk,
 ].filter(Boolean);
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+
+const composeEnhancer =
+  (process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 const persistConfig = {
   key: "root", //persist whole thing
   storage,
-  blacklist: ["user"], // actual value
+  whitelis: ["cart"], // actual value
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

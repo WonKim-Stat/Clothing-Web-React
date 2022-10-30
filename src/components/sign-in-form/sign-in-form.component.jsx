@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import FormInput from "../form-input/form-input.component";
 
 import {
-  signInWithGooglePopup,
+  // signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
+
+import { googleSignInStart } from "../../store/user/user.action";
 
 // import "./sign-in-form.styles.jsx";
 
@@ -20,6 +24,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const dispatch = useDispatch();
 
   // const { setCurrentUser } = useContext(UserContext);
 
@@ -35,7 +40,9 @@ const SignInForm = () => {
 
   // sign in with google pop-up
   const logGoogleUser = async () => {
-    await signInWithGooglePopup();
+    // await signInWithGooglePopup();
+    dispatch(googleSignInStart());
+
     // const { user } = await signInWithGooglePopup();
     // const userDocRef = createUserDocumentFromAuth(user);
     // setCurrentUser(user);
