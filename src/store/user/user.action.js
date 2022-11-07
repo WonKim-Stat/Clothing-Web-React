@@ -24,3 +24,28 @@ export const signInFailed = (error) => ({
   type: USER_ACTION_TYPES.SIGN_IN_FAILED,
   payload: error,
 });
+
+export const signUpStart = (email, password, displayName) => ({
+  type: USER_ACTION_TYPES.SIGN_UP_START,
+  payload: { email, password, displayName },
+});
+
+export const signUpSuccess = (user, additionalInformation) => ({
+  type: USER_ACTION_TYPES.SIGN_UP_SUCCESS,
+  payload: { user, additionalInformation },
+});
+export const signUpFailed = (error) => ({
+  type: USER_ACTION_TYPES.SIGN_UP_FAILED,
+  payload: error,
+});
+
+export const signOutStart = () => ({
+  type: USER_ACTION_TYPES.SIGN_OUT_START,
+});
+export const signOutSuccess = () => ({
+  type: USER_ACTION_TYPES.SIGN_OUT_SUCCESS,
+});
+export const signOutFailed = (error) => ({
+  type: USER_ACTION_TYPES.SIGN_OUT_FAILED,
+  payload: error,
+});

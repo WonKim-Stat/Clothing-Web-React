@@ -3,11 +3,14 @@ import { useDispatch } from "react-redux";
 import FormInput from "../form-input/form-input.component";
 
 import {
-  // signInWithGooglePopup,
+  signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
 
-import { googleSignInStart } from "../../store/user/user.action";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
 
 // import "./sign-in-form.styles.jsx";
 
@@ -50,10 +53,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(emailSignInStart(email, password));
 
       // setCurrentUser(user);
       reset();

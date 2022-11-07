@@ -1,4 +1,7 @@
 // import { useContext } from "react";
+import { useDispatch } from "react-redux";
+
+import { signOutStart } from "../../../store/user/user.action";
 
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react";
@@ -27,6 +30,7 @@ import { selectCurrentUser } from "../../../store/user/user.selector";
 import { selectIsCartOpen } from "../../../store/cart/cart.selector";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   // const { currentUser } = useContext(UserContext);
   // const currentUser = useSelector((state) => state.user.currentUser);
   const currentUser = useSelector(selectCurrentUser);
@@ -38,6 +42,7 @@ const Navigation = () => {
   //   await signOutUser();
   //   setCurrentUser(null);
   // };
+  const signOutHandler = () => dispatch(signOutStart());
 
   return (
     <Fragment>
@@ -50,7 +55,7 @@ const Navigation = () => {
           <NavLink to="/shop">SHOP</NavLink>
 
           {currentUser ? (
-            <NavLink as="span" onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutHandler}>
               SIGN-OUT
             </NavLink>
           ) : (
