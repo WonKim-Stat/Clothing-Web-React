@@ -16,7 +16,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   createAuthUserWithEmailAndPassword,
   SignoutUser,
-} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utilities/firebase/firebase.utility.js";
+} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utilities/firebase/firebase.utility.ts";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalInformation) {
   try {

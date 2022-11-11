@@ -1,3 +1,5 @@
+import { UserData } from "../../utilities/firebase/firebase.utility";
+
 export enum USER_ACTION_TYPES {
   SET_CURRENT_USER = "user/SET_CURRENT_USER",
   CHECK_USER_SESSION = "user/CHECK_USER_SESSION",
@@ -14,3 +16,9 @@ export enum USER_ACTION_TYPES {
   SIGN_OUT_SUCCESS = "user/SIGN_OUT_SUCCESS",
   SIGN_OUT_FAILED = "user/SIGN_OUT_FAILED",
 }
+
+export type UserState = {
+  currentUser: null | UserData;
+  isLoading: boolean;
+  error: null | Error;
+};

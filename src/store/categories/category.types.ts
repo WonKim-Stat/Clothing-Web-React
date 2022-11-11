@@ -4,9 +4,9 @@ export enum CATEGORY_ACTION_TYPES {
   FETCH_CATEGORIES_FAILED = "category/FETCH_CATEGORIES_FAILED",
 }
 export type CategoriesState = {
-  categories: Category[];
-  isLoading: boolean;
-  error: Error | null;
+  readonly categories: Category[];
+  readonly isLoading: boolean;
+  readonly error: Error | null;
 };
 
 export type Categorymap = {

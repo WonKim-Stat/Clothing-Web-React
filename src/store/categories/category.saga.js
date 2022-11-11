@@ -1,5 +1,5 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
-import { getCategoriesAndDocuments } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utilities/firebase/firebase.utility.js";
+import { getCategoriesAndDocuments } from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utilities/firebase/firebase.utility.ts";
 import {
   fetchCategoriesSuccess,
   fetchCategoriesFailed,
