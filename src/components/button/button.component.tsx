@@ -1,38 +1,32 @@
-// import "./button.styles.scss";
-
-// // three types of button
-// buttonType
-// google-sign-in
-// inverted
+import { ButtonHTMLAttributes, FC } from "react";
 import {
   BaseButton,
   GoogleSignInButton,
   InvertedButton,
 } from "./button.styles";
 
-export const BUTTON_TYPE_CLASSES = {
-  base: "base", // default
-  google: "google-sign-in",
-  inverted: "inverted",
-};
+export enum BUTTON_TYPE_CLASSES {
+  base = "base", // default
+  google = "google-sign-in",
+  inverted = "inverted",
+}
 
-const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base): typeof BaseButton =>
   ({
     [BUTTON_TYPE_CLASSES.base]: BaseButton,
     [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
     [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
   }[buttonType]);
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+export type ButtonProps = {
+  buttonType?: BUTTON_TYPE_CLASSES;
+  isLoading?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: FC<ButtonProps> = ({ children, buttonType, ...otherProps }) => {
   const CustomButton = getButton(buttonType);
 
-  return (
-    // <button
-    //   className={`${BUTTON_TYPE_CLASSES[buttonType]} button-container`}
-    //   {...otherProps}
-    // >
-    <CustomButton {...otherProps}>{children}</CustomButton>
-  );
+  return <CustomButton {...otherProps}>{children}</CustomButton>;
 };
 
 export default Button;
