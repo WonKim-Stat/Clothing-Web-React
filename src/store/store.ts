@@ -1,6 +1,5 @@
 import {
   compose,
-  // configureStore,
   legacy_createStore as createStore,
   applyMiddleware,
   Middleware,
