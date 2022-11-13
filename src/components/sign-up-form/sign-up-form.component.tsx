@@ -1,17 +1,14 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import FormInput from "../form-input/form-input.component";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "/Users/wonseokkim/complete-react/startover1/Clothing-Web-React/src/utils/firebase/firebase.utils.js";
 
 import { signUpStart } from "../../store/user/user.action";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 
 // import { UserContext } from "../../contexts/user.context";
 
 // import "./sign-up-form.styles.scss";
-import { SignUpContainer } from "./sign-up-form.sityles";
+import { SignUpContainer } from "./sign-up-form.styles";
 
 import Button from "../button/button.component";
 
@@ -29,7 +26,7 @@ const SignUpForm = () => {
 
   // const { setCurrentUser } = useContext(UserContext);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
     // console.log(formFields);
@@ -39,7 +36,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("the password is not matched, please try again");
@@ -59,7 +56,7 @@ const SignUpForm = () => {
       // await createUserDocumentFromAuth(user, { displayName });
       reset();
     } catch (error) {
-      console.log(error.message);
+      console.log((error as AuthError).message);
     }
   };
 

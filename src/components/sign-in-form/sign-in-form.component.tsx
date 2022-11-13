@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import FormInput from "../form-input/form-input.component";
+
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 
 import {
   signInWithGooglePopup,
@@ -30,7 +32,7 @@ const SignInForm = () => {
 
   // const { setCurrentUser } = useContext(UserContext);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
     // console.log(formFields);
@@ -50,7 +52,7 @@ const SignInForm = () => {
     // setCurrentUser(user);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       dispatch(emailSignInStart(email, password));
@@ -58,11 +60,11 @@ const SignInForm = () => {
       // setCurrentUser(user);
       reset();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
+      switch ((error as AuthError).code) {
+        case AuthErrorCodes.INVALID_PASSWORD:
           alert("wrong-password");
           break;
-        case "auth/user-not-found":
+        case AuthErrorCodes.USER_MISMATCH:
           alert("auth/user-not-found");
           break;
       }
